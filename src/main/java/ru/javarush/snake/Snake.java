@@ -1,10 +1,16 @@
 package ru.javarush.snake;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 /**
  * Класс змея
  */
+@Component
 public class Snake {
     //Направление движения змеи
     private SnakeDirection direction;
@@ -13,7 +19,10 @@ public class Snake {
     //Список кусочков змеи.
     private ArrayList<SnakeSection> sections;
 
-    public Snake(int x, int y) {
+    public Snake() {
+    }
+    
+    public Snake(@Value("10") int x, @Value("10") int y) {
         sections = new ArrayList<SnakeSection>();
         sections.add(new SnakeSection(x, y));
         isAlive = true;
@@ -35,7 +44,7 @@ public class Snake {
         return direction;
     }
 
-    public void setDirection(SnakeDirection direction) {
+    public void setDirection(@Value("DOWN") SnakeDirection direction) {
         this.direction = direction;
     }
 

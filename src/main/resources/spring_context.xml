@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
->
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-4.1.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
-    <bean id="keyBoardObserver" class="ru.javarush.snake.KeyboardObserver">
-        <property name="frame" ref="jFrame"/>
-    </bean>
+    <context:annotation-config/>
+    <context:component-scan base-package="ru.javarush.snake"/>
 
-    <bean id="jFrame" class="javax.swing.JFrame">
+    <bean id="frame" class="javax.swing.JFrame">
         <constructor-arg value="KeyPress Tester"/>
         <property name="title" value="Transparent JFrame Demo"/>
         <property name="defaultCloseOperation" value="3"/>
@@ -19,19 +25,6 @@
         </property>
         <property name="opacity" value="0.0f"/>
         <property name="visible" value="true"/>
-    </bean>
-
-    <bean id="room" class="ru.javarush.snake.Room" init-method="createMouse">
-        <constructor-arg value="20"/>
-        <constructor-arg value="20"/>
-        <constructor-arg>
-            <bean class="ru.javarush.snake.Snake">
-                <constructor-arg value="10"/>
-                <constructor-arg value="10"/>
-                <property name="direction" value="DOWN"/>
-            </bean>
-        </constructor-arg>
-        <property name="keyboardObserver" ref="keyBoardObserver"/>
     </bean>
 
 

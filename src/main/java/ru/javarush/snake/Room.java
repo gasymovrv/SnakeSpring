@@ -1,21 +1,24 @@
 package ru.javarush.snake;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
  * Основной класс программы.
  */
+@Component
 public class Room {
     private int width;
     private int height;
     private Snake snake;
     private Mouse mouse;
     private KeyboardObserver keyboardObserver;
-
-
-
+    @Autowired
     public void setKeyboardObserver(KeyboardObserver keyboardObserver) {
         this.keyboardObserver = keyboardObserver;
     }
@@ -23,7 +26,8 @@ public class Room {
     public Room() {
     }
 
-    public Room(int width, int height, Snake snake) {
+    @Autowired
+    public Room(@Value("20") int width,@Value("20") int height, Snake snake) {
         this.width = width;
         this.height = height;
         this.snake = snake;
