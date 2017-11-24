@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean id="keyBoardObserver" class="ru.javarush.snake.KeyboardObserver">
+        <property name="frame" ref="jFrame"/>
+    </bean>
+
+    <bean id="jFrame" class="javax.swing.JFrame">
+        <constructor-arg value="KeyPress Tester"/>
+        <property name="title" value="Transparent JFrame Demo"/>
+        <property name="defaultCloseOperation" value="3"/>
+        <property name="undecorated" value="true"/>
+        <property name="extendedState" value="6"/>
+        <property name="layout">
+            <bean class="java.awt.GridBagLayout"/>
+        </property>
+        <property name="opacity" value="0.0f"/>
+        <property name="visible" value="true"/>
+    </bean>
+
+    <bean id="room" class="ru.javarush.snake.Room" init-method="createMouse">
+        <constructor-arg value="20"/>
+        <constructor-arg value="20"/>
+        <constructor-arg>
+            <bean class="ru.javarush.snake.Snake">
+                <constructor-arg value="10"/>
+                <constructor-arg value="10"/>
+                <property name="direction" value="DOWN"/>
+            </bean>
+        </constructor-arg>
+        <property name="keyboardObserver" ref="keyBoardObserver"/>
+    </bean>
+
+
+</beans>
