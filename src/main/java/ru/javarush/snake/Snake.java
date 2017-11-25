@@ -1,6 +1,6 @@
 package ru.javarush.snake;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс змея
@@ -11,11 +11,9 @@ public class Snake {
     //Состояние - жива змея или нет.
     private boolean isAlive;
     //Список кусочков змеи.
-    private ArrayList<SnakeSection> sections;
+    private List<SnakeSection> sections;
 
-    public Snake(int x, int y) {
-        sections = new ArrayList<SnakeSection>();
-        sections.add(new SnakeSection(x, y));
+    public Snake() {
         isAlive = true;
     }
 
@@ -39,8 +37,12 @@ public class Snake {
         this.direction = direction;
     }
 
-    public ArrayList<SnakeSection> getSections() {
+    public List<SnakeSection> getSections() {
         return sections;
+    }
+
+    public void setSections(List<SnakeSection> sections) {
+        this.sections = sections;
     }
 
     /**

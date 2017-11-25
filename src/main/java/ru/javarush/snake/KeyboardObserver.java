@@ -19,17 +19,7 @@ public class KeyboardObserver extends Thread {
 
     @Override
     public void run() {
-//        frame = new JFrame("KeyPress Tester");
-//        frame.setTitle("Transparent JFrame Demo");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        frame.setUndecorated(true);
         frame.setSize(400, 400);
-//        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        frame.setLayout(new GridBagLayout());
-//        frame.setOpacity(0.0f);
-//        frame.setVisible(true);
-
         frame.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {

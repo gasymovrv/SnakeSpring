@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
 >
 
     <bean id="keyBoardObserver" class="ru.javarush.snake.KeyboardObserver">
@@ -21,18 +22,35 @@
         <property name="visible" value="true"/>
     </bean>
 
-    <bean id="room" class="ru.javarush.snake.Room" init-method="createMouse">
+    <bean id="room" class="ru.javarush.snake.Room">
         <constructor-arg value="20"/>
         <constructor-arg value="20"/>
-        <constructor-arg>
-            <bean class="ru.javarush.snake.Snake">
-                <constructor-arg value="10"/>
-                <constructor-arg value="10"/>
-                <property name="direction" value="DOWN"/>
-            </bean>
-        </constructor-arg>
+        <constructor-arg ref="snake"/>
         <property name="keyboardObserver" ref="keyBoardObserver"/>
+        <property name="mouseGenerate" ref="mouseGenerate"/>
+        <property name="mouse" ref="mouse"/>
     </bean>
 
+    <bean id="snake" class="ru.javarush.snake.Snake">
+        <property name="direction" value="DOWN"/>
+        <property name="sections">
+            <list>
+                <ref bean="snakeSection"/>
+            </list>
+        </property>
+    </bean>
 
+    <bean id="snakeSection" class="ru.javarush.snake.SnakeSection">
+        <constructor-arg value="10"/>
+        <constructor-arg value="10"/>
+    </bean>
+
+    <bean id="mouse" class="ru.javarush.snake.Mouse" scope="prototype">
+        <constructor-arg value="#{T(java.lang.Math).random()*room.width}"/>
+        <constructor-arg value="#{T(java.lang.Math).random()*room.height}"/>
+    </bean>
+
+    <bean id="mouseGenerate" class="ru.javarush.snake.MouseGenerate">
+        <lookup-method name="createMouse" bean="mouse"/>
+    </bean>
 </beans>

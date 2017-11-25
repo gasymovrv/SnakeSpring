@@ -6,15 +6,19 @@ import java.util.ArrayList;
 
 /**
  * Основной класс программы.
+ *
  */
 public class Room {
     private int width;
     private int height;
     private Snake snake;
     private Mouse mouse;
+    private MouseGenerate mouseGenerate;
     private KeyboardObserver keyboardObserver;
 
-
+    public void setMouseGenerate(MouseGenerate mouseGenerate) {
+        this.mouseGenerate = mouseGenerate;
+    }
 
     public void setKeyboardObserver(KeyboardObserver keyboardObserver) {
         this.keyboardObserver = keyboardObserver;
@@ -27,6 +31,10 @@ public class Room {
         this.width = width;
         this.height = height;
         this.snake = snake;
+    }
+
+    public MouseGenerate getMouseGenerate() {
+        return mouseGenerate;
     }
 
     public Snake getSnake() {
@@ -136,18 +144,9 @@ public class Room {
      * Метод вызывается, когда мышь съели
      */
     public void eatMouse() {
-        createMouse();
+        mouse = mouseGenerate.createMouse();
     }
 
-    /**
-     * Создает новую мышь
-     */
-    public void createMouse() {
-        int x = (int) (Math.random() * width);
-        int y = (int) (Math.random() * height);
-
-        mouse = new Mouse(x, y);
-    }
 
     private int initialDelay = 520;
     private int delayStep = 20;
