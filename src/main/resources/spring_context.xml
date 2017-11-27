@@ -35,4 +35,14 @@
     <!--<util:list id="listSection" list-class="java.util.ArrayList">-->
         <!--<ref bean="snakeSection"/>-->
     <!--</util:list>-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>room.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
 </beans>

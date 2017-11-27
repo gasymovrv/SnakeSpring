@@ -11,7 +11,7 @@ public class SnakeSection {
     private int y;
 
     @Autowired
-    public SnakeSection(@Value("10") int x, @Value("10") int y) {
+    public SnakeSection(@Value("${defaultSnakeSectionX}") int x, @Value("${defaultSnakeSectionY}") int y) {
         this.x = x;
         this.y = y;
     }

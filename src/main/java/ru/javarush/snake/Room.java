@@ -26,7 +26,7 @@ public class Room {
     }
 
     @Autowired
-    public Room(@Value("20") int width, @Value("20") int height) {
+    public Room(@Value("${roomWidth}") int width, @Value("${roomHeight}") int height) {
         this.width = width;
         this.height = height;
     }

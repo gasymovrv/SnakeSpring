@@ -56,7 +56,7 @@ public class Snake {
     }
 
     @Autowired
-    public void setDirection(@Value("DOWN") SnakeDirection direction) {
+    public void setDirection(@Value("${defaultMove}") SnakeDirection direction) {
         this.direction = direction;
     }
 
