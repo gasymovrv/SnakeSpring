@@ -24,7 +24,6 @@ public class KeyboardObserver extends Thread {
     @Override
     public void run() {
         frame.setSize(400, 400);
-
         frame.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
