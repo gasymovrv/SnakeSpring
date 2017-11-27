@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     private static ApplicationContext ctx = new ClassPathXmlApplicationContext("spring_context.xml");
-    public static Room game = (Room)ctx.getBean("room");
+    public static Room game = (Room) ctx.getBean("room");
 
     public static void main(String[] args) {
         game.run();

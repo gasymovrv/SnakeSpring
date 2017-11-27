@@ -1,11 +1,17 @@
 package ru.javarush.snake;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class SnakeSection {
     private int x;
     private int y;
 
-
-    public SnakeSection(int x, int y) {
+    @Autowired
+    public SnakeSection(@Value("10") int x, @Value("10") int y) {
         this.x = x;
         this.y = y;
     }

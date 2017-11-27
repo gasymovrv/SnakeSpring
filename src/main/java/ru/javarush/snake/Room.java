@@ -19,60 +19,64 @@ public class Room {
     private Mouse mouse;
     private MouseGenerate mouseGenerate;
     private KeyboardObserver keyboardObserver;
-
-
-    public void setMouseGenerate(MouseGenerate mouseGenerate) {
-        this.mouseGenerate = mouseGenerate;
-    }
-    @Autowired
-    public void setKeyboardObserver(KeyboardObserver keyboardObserver) {
-        this.keyboardObserver = keyboardObserver;
-    }
+    private int initialDelay = 520;
+    private int delayStep = 20;
 
     public Room() {
     }
 
     @Autowired
-    public Room(@Value("20") int width,@Value("20") int height, Snake snake) {
+    public Room(@Value("20") int width, @Value("20") int height) {
         this.width = width;
         this.height = height;
-        this.snake = snake;
+    }
+
+    @Autowired
+    public void setKeyboardObserver(KeyboardObserver keyboardObserver) {
+        this.keyboardObserver = keyboardObserver;
     }
 
     public MouseGenerate getMouseGenerate() {
         return mouseGenerate;
     }
 
+    @Autowired
+    public void setMouseGenerate(MouseGenerate mouseGenerate) {
+        this.mouseGenerate = mouseGenerate;
+    }
+
     public Snake getSnake() {
         return snake;
+    }
+
+    @Autowired
+    public void setSnake(Snake snake) {
+        this.snake = snake;
     }
 
     public Mouse getMouse() {
         return mouse;
     }
 
-    public int getWidth() {
-        return width;
+    @Autowired
+    public void setMouse(Mouse mouse) {
+        this.mouse = mouse;
     }
 
-    public int getHeight() {
-        return height;
+    public int getWidth() {
+        return width;
     }
 
     public void setWidth(int width) {
         this.width = width;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-
-    public void setMouse(Mouse mouse) {
-        this.mouse = mouse;
     }
 
     /**
@@ -152,10 +156,6 @@ public class Room {
     public void eatMouse() {
         mouse = mouseGenerate.createMouse();
     }
-
-
-    private int initialDelay = 520;
-    private int delayStep = 20;
 
     /**
      * Программа делает паузу, длина которой зависит от длинны змеи.

@@ -1,4 +1,5 @@
 package ru.javarush.snake;
+
 /**
  * Создает новую мышь
  * используя настройки бина mouse

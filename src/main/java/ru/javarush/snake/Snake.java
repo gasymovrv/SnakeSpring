@@ -3,6 +3,7 @@ package ru.javarush.snake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,12 +19,12 @@ public class Snake {
     //Состояние - жива змея или нет.
     private boolean isAlive;
     //Список кусочков змеи.
-    private List<SnakeSection> sections;
+    private ArrayList<SnakeSection> sections;
+    private SnakeSection section;
+    private Room room;
 
     public Snake() {
-    }
-
-    public Snake(@Value("10") int x, @Value("10") int y) {
+        sections = new ArrayList<>();
         isAlive = true;
     }
 
@@ -39,10 +40,22 @@ public class Snake {
         return sections.get(0).getY();
     }
 
+    @Autowired
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    @Autowired
+    public void setSection(SnakeSection section) {
+        this.section = section;
+        sections.add(section);
+    }
+
     public SnakeDirection getDirection() {
         return direction;
     }
 
+    @Autowired
     public void setDirection(@Value("DOWN") SnakeDirection direction) {
         this.direction = direction;
     }
@@ -51,9 +64,11 @@ public class Snake {
         return sections;
     }
 
-    public void setSections(List<SnakeSection> sections) {
-        this.sections = sections;
-    }
+//    @Autowired
+//    @Qualifier("listSection")
+//    public void setSections(ArrayList<SnakeSection> sections) {
+//        this.sections = sections;
+//    }
 
     /**
      * Метод перемещает змею на один ход.
@@ -90,11 +105,11 @@ public class Snake {
         if (!isAlive) return;
 
         //Проверяем - не съела ли змея мышь.
-        Mouse mouse = App.game.getMouse();
+        Mouse mouse = room.getMouse();
         if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) //съела
         {
             sections.add(0, head);                  //Добавили новую голову
-            App.game.eatMouse();                   //Хвот не удаляем, но создаем новую мышь.
+            room.eatMouse();                   //Хвот не удаляем, но создаем новую мышь.
         } else //просто движется
         {
             sections.add(0, head);                  //добавили новую голову
@@ -106,7 +121,7 @@ public class Snake {
      * Метод проверяет - находится ли новая голова в пределах комнаты
      */
     private void checkBorders(SnakeSection head) {
-        if ((head.getX() < 0 || head.getX() >= App.game.getWidth()) || head.getY() < 0 || head.getY() >= App.game.getHeight()) {
+        if ((head.getX() < 0 || head.getX() >= room.getWidth()) || head.getY() < 0 || head.getY() >= room.getHeight()) {
             isAlive = false;
         }
     }

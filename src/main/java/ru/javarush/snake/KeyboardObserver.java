@@ -11,11 +11,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+
 @Component
 public class KeyboardObserver extends Thread {
     private Queue<KeyEvent> keyEvents = new ArrayBlockingQueue<KeyEvent>(100);
 
     private JFrame frame;
+
     @Autowired
     public void setFrame(JFrame frame) {
         this.frame = frame;
