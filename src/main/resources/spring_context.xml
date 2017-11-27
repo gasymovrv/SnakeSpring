@@ -27,17 +27,12 @@
         <property name="visible" value="true"/>
     </bean>
 
-    <!--<bean id="mouse" class="ru.javarush.snake.Mouse" scope="prototype">-->
-        <!--<constructor-arg value="#{T(java.lang.Math).random()*room.width}"/>-->
-        <!--<constructor-arg value="#{T(java.lang.Math).random()*room.height}"/>-->
-    <!--</bean>-->
-
     <bean id="mouseGenerate" class="ru.javarush.snake.MouseGenerate">
         <lookup-method name="createMouse" bean="mouse"/>
     </bean>
 
-    <!--не работает с аннотированными бинами-->
-    <util:list id="listSection" list-class="java.util.ArrayList">
-        <ref bean="snakeSection"/>
-    </util:list>
+    <!--почему то не работает с аннотированными бинами-->
+    <!--<util:list id="listSection" list-class="java.util.ArrayList">-->
+        <!--<ref bean="snakeSection"/>-->
+    <!--</util:list>-->
 </beans>
