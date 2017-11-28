@@ -3,7 +3,6 @@ package ru.javarush.snake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,13 +19,28 @@ public class Snake {
     private boolean isAlive;
     //Список кусочков змеи.
     private ArrayList<SnakeSection> sections;
-    private SnakeSection section;
     private Room room;
 
     public Snake() {
-        sections = new ArrayList<>();
         isAlive = true;
     }
+
+    @Autowired
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    @Autowired
+    public void setDirection(@Value("${defaultMove}") SnakeDirection direction) {
+        this.direction = direction;
+    }
+
+    @Autowired
+    @Qualifier("listSnakeSections")
+    public void setSections(ArrayList<SnakeSection> sections) {
+        this.sections = sections;
+    }
+
 
     public boolean isAlive() {
         return isAlive;
@@ -40,35 +54,14 @@ public class Snake {
         return sections.get(0).getY();
     }
 
-    @Autowired
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    @Autowired
-    public void setSection(SnakeSection section) {
-        this.section = section;
-        sections.add(section);
-    }
-
     public SnakeDirection getDirection() {
         return direction;
-    }
-
-    @Autowired
-    public void setDirection(@Value("${defaultMove}") SnakeDirection direction) {
-        this.direction = direction;
     }
 
     public List<SnakeSection> getSections() {
         return sections;
     }
 
-//    @Autowired
-//    @Qualifier("listSection")
-//    public void setSections(ArrayList<SnakeSection> sections) {
-//        this.sections = sections;
-//    }
 
     /**
      * Метод перемещает змею на один ход.
