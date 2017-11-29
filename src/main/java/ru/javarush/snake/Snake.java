@@ -18,7 +18,7 @@ public class Snake {
     //Состояние - жива змея или нет.
     private boolean isAlive;
     //Список кусочков змеи.
-    private ArrayList<SnakeSection> sections;
+    private List<SnakeSection> sections;
     private Room room;
 
     public Snake() {
@@ -35,9 +35,9 @@ public class Snake {
         this.direction = direction;
     }
 
+    //с коллекциями @Qualifier работает не корректно, поэтому используем SpEL
     @Autowired
-    @Qualifier("listSnakeSections")
-    public void setSections(ArrayList<SnakeSection> sections) {
+    public void setSections(@Value("#{listSnakeSections}") List<SnakeSection> sections) {
         this.sections = sections;
     }
 

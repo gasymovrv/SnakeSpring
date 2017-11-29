@@ -6,17 +6,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Configuration
 public class SnakeSectionFactory {
-    @Autowired
-    private SnakeSection section;
-
+    //Внутрь этого бина мы передаем бин snakeSection
     @Bean
-    @Qualifier("listSnakeSections")
-    public ArrayList<SnakeSection> listSnakeSections(){
-        ArrayList<SnakeSection> list = new ArrayList<>();
-        list.add(section);
+    public List<SnakeSection> listSnakeSections(SnakeSection snakeSection){
+        List<SnakeSection> list = new ArrayList<>();
+        list.add(snakeSection);
         return list;
     }
 
